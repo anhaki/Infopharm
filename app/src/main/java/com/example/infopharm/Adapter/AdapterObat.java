@@ -7,15 +7,19 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.infopharm.API.APIRequestData;
 import com.example.infopharm.API.RetroServer;
 import com.example.infopharm.Activities.MainActivity;
+import com.example.infopharm.Activities.UbahActivity;
 import com.example.infopharm.Model.ModelObat;
 import com.example.infopharm.Model.ModelResponse;
 import com.example.infopharm.R;
@@ -44,10 +48,19 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
 
     @Override
     public void onBindViewHolder(@NonNull VHObat holder, int position) {
-        ModelObat MK = listObat.get(position);
-        holder.tvId.setText(MK.getId_obat());
-        holder.tvNama.setText(MK.getNama());
-        holder.tvGolongan.setText(MK.getGolongan());
+        ModelObat MO = listObat.get(position);
+        holder.tvId.setText(MO.getId_obat());
+        holder.tvNama.setText(MO.getNama());
+        holder.tvGolongan.setText(MO.getGolongan());
+        holder.tvBentuk.setText(MO.getBentuk());
+        holder.tvEfek.setText(MO.getEfek_samping());
+        holder.tvDeskripsi.setText(MO.getDeskripsi());
+
+        Glide.with(holder.itemView.getContext())
+                .load(MO.getFoto())
+                .apply(new RequestOptions().override(100, 100))
+                .into(holder.ivFoto);
+
     }
 
     @Override
@@ -56,7 +69,8 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
     }
 
     public class VHObat extends RecyclerView.ViewHolder{
-        TextView tvId, tvNama, tvGolongan;
+        TextView tvId, tvNama, tvGolongan, tvBentuk, tvEfek, tvDeskripsi;
+        ImageView ivFoto;
 
         public VHObat(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +78,11 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
             tvId = itemView.findViewById(R.id.tv_id);
             tvNama = itemView.findViewById(R.id.tv_nama);
             tvGolongan = itemView.findViewById(R.id.tv_golongan);
+            tvBentuk = itemView.findViewById(R.id.tv_Bentuk);
+            tvEfek = itemView.findViewById(R.id.tv_Efek);
+            tvDeskripsi = itemView.findViewById(R.id.tv_deskripsi);
+            ivFoto = itemView.findViewById(R.id.Iv_foto);
+
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -80,17 +99,19 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
                             dialog.dismiss();
                         }
                     });
-//                    pesan.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Intent pindah = new Intent(ctx, UbahActivity.class);
-//                            pindah.putExtra("xId", tvId.getText().toString());
-//                            pindah.putExtra("xNama", tvNama.getText().toString());
-//                            pindah.putExtra("xAsal", tvAsal.getText().toString());
-//                            pindah.putExtra("xDeskripsi", tvDeskripsiSingkat.getText().toString());
-//                            ctx.startActivity(pindah);
-//                        }
-//                    });
+                    pesan.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent pindah = new Intent(ctx, UbahActivity.class);
+                            pindah.putExtra("xId", tvId.getText().toString());
+                            pindah.putExtra("xNama", tvNama.getText().toString());
+                            pindah.putExtra("xBentuk", tvBentuk.getText().toString());
+                            pindah.putExtra("xEfek", tvEfek.getText().toString());
+                            pindah.putExtra("xDeskripsi", tvDeskripsi.getText().toString());
+                            pindah.putExtra("xGolongan", tvGolongan.getText().toString());
+                            ctx.startActivity(pindah);
+                        }
+                    });
                     pesan.show();
                     return false;
                 }

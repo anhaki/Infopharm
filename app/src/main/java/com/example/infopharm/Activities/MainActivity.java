@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.infopharm.API.APIRequestData;
@@ -27,11 +28,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvObat;
-    private FloatingActionButton fabTambah;
+    private FloatingActionButton fabTambah, fabBebas, fabBebasTerbatas, fabKeras, fabNarkotika;
     private ProgressBar pbObat;
     private RecyclerView.Adapter adObat;
     private RecyclerView.LayoutManager lmObat;
     private List<ModelObat> listObat = new ArrayList<>();
+//    private AdapterObat
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +41,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rvObat = findViewById(R.id.rv_obat);
-//        fabTambah = findViewById(R.id.fab_tambah);
+        fabTambah = findViewById(R.id.fab_tambah);
+        fabBebas = findViewById(R.id.fab_bebas);
+        fabBebasTerbatas = findViewById(R.id.fab_bebasTerbatas);
+        fabKeras = findViewById(R.id.fab_keras);
+        fabNarkotika = findViewById(R.id.fab_narkotika);
+
         pbObat = findViewById(R.id.pb_obat);
 
         lmObat = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvObat.setLayoutManager(lmObat);
 
-//        fabTambah.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, TambahActivity.class));
-//            }
-//        });
+        fabTambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TambahActivity.class));
+            }
+        });
+
+        fabBebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retrieveGolongan("bebas");
+            }
+        });
+
+        fabBebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retrieveGolongan("bebas");
+            }
+        });
+
     }
 
 
@@ -86,4 +108,31 @@ public class MainActivity extends AppCompatActivity {
                 pbObat.setVisibility(View.GONE);
             }
         });
-    }}
+    }
+
+
+
+    private void retrieveGolongan(String className){
+        rvObat.setVisibility(View.INVISIBLE);
+        pbObat.setVisibility(View.VISIBLE);
+
+        APIRequestData ardData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
+        Call<ModelResponse> prosess = ardData.getGolongan(className);
+
+        prosess.enqueue(new Callback<ModelResponse>() {
+            @Override
+            public void onResponse(Call<ModelResponse> call, Response<ModelResponse> response) {
+                listObat = (List<ModelObat>) response.body();
+                adObat = new AdapterObat(MainActivity.this, listObat);
+                rvObat.setAdapter(adObat);
+                pbObat.setVisibility(View.INVISIBLE);
+                rvObat.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailure(Call<ModelResponse> call, Throwable t) {
+                pbObat.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+}

@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="50dp"
-    android:layout_margin="5dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:padding="20dp"
+    android:background="@drawable/corner_radius"
+    >
+    <ImageView
+        android:id="@+id/Iv_foto"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_centerVertical="true"
 
+        />
     <LinearLayout
         android:id="@+id/ll_obat"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@id/Iv_foto"
+        android:layout_centerVertical="true"
+        >
 
         <TextView
             android:id="@+id/tv_nama"
@@ -18,7 +34,8 @@
             android:layout_height="wrap_content"
             android:text="Nama Obat"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="#E7F6F2"/>
         <TextView
             android:id="@+id/tv_id"
             android:layout_width="wrap_content"
@@ -26,13 +43,51 @@
             android:text="Id"
             android:textSize="18sp"
             android:visibility="gone"/>
-
         <TextView
             android:id="@+id/tv_golongan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Golongan Obat"
-            android:textSize="18sp"/>
-    </LinearLayout>
+            android:textSize="18sp"
+            android:textColor="#E7F6F2"/>
+        <TextView
+            android:id="@+id/tv_Bentuk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bentuk Obat"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_Efek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Efek samping Obat"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_deskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi Obat"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Foto Obat"
+            android:textSize="18sp"
+            android:visibility="gone"/>
 
-</androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+
+        />
+
+
+</RelativeLayout>

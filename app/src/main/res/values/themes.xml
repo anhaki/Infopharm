@@ -13,4 +13,13 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="fabRound" parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/fabStyle</item>
+    </style>
+
+    <style name="fabStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">30%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
 </resources>
