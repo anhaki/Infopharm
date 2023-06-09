@@ -1,5 +1,7 @@
 package com.example.infopharm.Activities;
 
+import static java.security.AccessController.getContext;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,11 +30,11 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvObat;
-    private FloatingActionButton fabTambah, fabBebas, fabBebasTerbatas, fabKeras, fabNarkotika;
+    private FloatingActionButton fabTambah, fabBebas, fabBebasTerbatas, fabKeras, fabNarkotika, fabSemua;
     private ProgressBar pbObat;
     private RecyclerView.Adapter adObat;
     private RecyclerView.LayoutManager lmObat;
-    private List<ModelObat> listObat = new ArrayList<>();
+    private List<ModelObat> listObat;
 //    private AdapterObat
 
     @Override
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         fabBebasTerbatas = findViewById(R.id.fab_bebasTerbatas);
         fabKeras = findViewById(R.id.fab_keras);
         fabNarkotika = findViewById(R.id.fab_narkotika);
+        fabSemua = findViewById(R.id.fab_semua);
 
         pbObat = findViewById(R.id.pb_obat);
 
@@ -59,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fabSemua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { retrieveObat(); }
+        });
+
         fabBebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,10 +74,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        fabBebas.setOnClickListener(new View.OnClickListener() {
+        fabBebasTerbatas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                retrieveGolongan("bebas");
+                retrieveGolongan("bebasTerbatas");
+            }
+        });
+
+        fabKeras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retrieveGolongan("keras");
+            }
+        });
+        fabNarkotika.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retrieveGolongan("narkotika");
             }
         });
 
@@ -112,27 +133,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void retrieveGolongan(String className){
+
+    private void retrieveGolongan(String golongan){
         rvObat.setVisibility(View.INVISIBLE);
         pbObat.setVisibility(View.VISIBLE);
 
         APIRequestData ardData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ModelResponse> prosess = ardData.getGolongan(className);
+        Call<ModelResponse> prosess = ardData.getGolongan(golongan);
 
         prosess.enqueue(new Callback<ModelResponse>() {
             @Override
             public void onResponse(Call<ModelResponse> call, Response<ModelResponse> response) {
-                listObat = (List<ModelObat>) response.body();
+                String kode = response.body().getKode();
+                String pesan = response.body().getPesan();
+                listObat = response.body().getData();
+
                 adObat = new AdapterObat(MainActivity.this, listObat);
                 rvObat.setAdapter(adObat);
-                pbObat.setVisibility(View.INVISIBLE);
+                adObat.notifyDataSetChanged();
+
+                pbObat.setVisibility(View.GONE);
                 rvObat.setVisibility(View.VISIBLE);
+
             }
 
             @Override
             public void onFailure(Call<ModelResponse> call, Throwable t) {
-                pbObat.setVisibility(View.INVISIBLE);
+                Toast.makeText(MainActivity.this, "Gagal Menghubungi Server", Toast.LENGTH_SHORT).show();
+                pbObat.setVisibility(View.GONE);
             }
         });
     }
+
 }

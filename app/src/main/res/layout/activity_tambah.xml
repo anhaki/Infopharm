@@ -1,75 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.TambahActivity"
-    android:orientation="vertical"
-    android:padding="10dp">
+    tools:context=".Activities.TambahActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tambah Obat"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        />
-
-    <EditText
-        android:id="@+id/et_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nama Obat"
-        android:textSize="21sp"
-        android:layout_marginTop="30dp"/>
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_golongan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Golongan Obat"
-        android:textSize="21sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Data Obat"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            />
 
-    <EditText
-        android:id="@+id/et_bentuk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Bentuk Obat"
-        android:textSize="21sp"/>
-    <EditText
-        android:id="@+id/et_efek"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Efek Samping Obat"
-        android:textSize="21sp"/>
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Obat"
+            android:textSize="21sp"
+            android:layout_marginTop="30dp"/>
 
-    <EditText
-        android:id="@+id/et_deskripsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Deskripsi Obat"
-        android:textSize="21sp"/>
+        <EditText
+            android:id="@+id/et_golongan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Golongan Obat"
+            android:textSize="21sp"/>
 
-    <EditText
-        android:id="@+id/et_foto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Upload Foto  Obat"
-        android:textSize="21sp"/>
+        <EditText
+            android:id="@+id/et_bentuk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bentuk Obat"
+            android:textSize="21sp"/>
+        <EditText
+            android:id="@+id/et_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Deskripsi Obat"
+            android:textSize="21sp"/>
+        <EditText
+            android:id="@+id/et_efek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Efek Samping Obat"
+            android:textSize="21sp"/>
 
-    <Button
-        android:id="@+id/btn_tambah"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="20dp"
-        android:text="Simpan"
-        android:textSize="18sp"
-        android:backgroundTint="#2CCA08"/>
+        <EditText
+            android:id="@+id/et_foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Upload Foto  Obat"
+            android:textSize="21sp"/>
 
+        <Button
+            android:id="@+id/btn_tambah"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="Tambah"
+            android:textSize="18sp"
+            android:backgroundTint="#2CCA08"/>
+    </LinearLayout>
 
-
-</LinearLayout>
+</ScrollView>

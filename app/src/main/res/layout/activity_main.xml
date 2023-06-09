@@ -51,76 +51,89 @@
 
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_semua"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/corner_white"
+        android:gravity="center_vertical"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="100dp"
-        app:fabCustomSize= "50dp"
-        app:tint="@null"
-        />
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="60dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        >
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_semua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            app:fabCustomSize= "40dp"
+            app:tint="@null"
+            />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_bebas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="159dp"
-        android:backgroundTint="#05B93C"
-        app:backgroundTint="@color/black"
-        app:borderWidth="5dp"
-        app:fabCustomSize= "50dp"
-        app:tint="@null"
-        />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_bebas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#05B93C"
+            app:backgroundTint="@color/black"
+            app:borderWidth="5dp"
+            app:fabCustomSize= "40dp"
+            app:tint="@null"
+            />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_bebasTerbatas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="218dp"
-        android:backgroundTint="#0B14F6"
-        app:backgroundTint="@color/black"
-        app:borderWidth="5dp"
-        app:fabCustomSize= "50dp"
-        app:tint="@null"
-        />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_keras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="277dp"
-        android:backgroundTint= "#D7272A"
-        app:backgroundTint="@color/black"
-        app:borderWidth="5dp"
-        app:fabCustomSize= "50dp"
-        app:tint="@null"
-        />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_bebasTerbatas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#0B14F6"
+            app:backgroundTint="@color/black"
+            app:borderWidth="5dp"
+            app:fabCustomSize= "40dp"
+            app:tint="@null"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_keras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint= "#D7272A"
+            app:backgroundTint="@color/black"
+            app:borderWidth="5dp"
+            app:fabCustomSize= "40dp"
+            app:tint="@null"
+            />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_narkotika"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="336dp"
-        android:backgroundTint= "@color/white"
-        app:backgroundTint="#D8282B"
-        app:borderWidth="5dp"
-        app:fabCustomSize="50dp"
-        app:tint="@null" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_narkotika"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint= "@color/white"
+            app:backgroundTint="#D8282B"
+            app:borderWidth="5dp"
+            app:fabCustomSize="40dp"
+            app:tint="@null" />
 
+
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pb_obat"
