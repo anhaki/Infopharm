@@ -12,12 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.infopharm.API.APIRequestData;
 import com.example.infopharm.API.RetroServer;
+import com.example.infopharm.Activities.DetailActivity;
 import com.example.infopharm.Activities.MainActivity;
 import com.example.infopharm.Activities.UbahActivity;
 import com.example.infopharm.Model.ModelObat;
@@ -52,15 +54,45 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
         holder.tvId.setText(MO.getId_obat());
         holder.tvNama.setText(MO.getNama());
         holder.tvGolongan.setText(MO.getGolongan());
+//        if(MO.getGolongan().equalsIgnoreCase("Obat bebas")){
+//            holder.itemView.setBackground(ContextCompat.getDrawable(ctx, R.drawable.corner_radius_bbs));
+//        }
+//        else if(MO.getGolongan().equalsIgnoreCase("Obat bebas terbatas")){
+//            holder.itemView.setBackground(ContextCompat.getDrawable(ctx, R.drawable.corner_radius_tbt));
+//        }
+//        else if(MO.getGolongan().equalsIgnoreCase("Obat keras")){
+//            holder.itemView.setBackground(ContextCompat.getDrawable(ctx, R.drawable.corner_radius_krs));
+//        }
+//        else if(MO.getGolongan().equalsIgnoreCase("Narkotika")){
+//            holder.itemView.setBackground(ContextCompat.getDrawable(ctx, R.drawable.corner_radius_nkt));
+//        }
         holder.tvBentuk.setText(MO.getBentuk());
         holder.tvEfek.setText(MO.getEfek_samping());
         holder.tvDeskripsi.setText(MO.getDeskripsi());
+        holder.tvFoto.setText(MO.getFoto());
 
-        Glide.with(holder.itemView.getContext())
-                .load(MO.getFoto())
-                .apply(new RequestOptions().override(100, 100))
-                .into(holder.ivFoto);
+        if(!MO.getFoto().equals("")){
+            Glide.with(holder.itemView.getContext())
+                    .load(MO.getFoto())
+                    .into(holder.ivFoto);
+        }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pindah = new Intent(ctx, DetailActivity.class);
+                pindah.putExtra("xId", MO.getId_obat());
+                pindah.putExtra("xNama", MO.getNama());
+                pindah.putExtra("xBentuk", MO.getBentuk());
+                pindah.putExtra("xEfek", MO.getEfek_samping());
+                pindah.putExtra("xDeskripsi", MO.getDeskripsi());
+                pindah.putExtra("xGolongan", MO.getGolongan());
+                pindah.putExtra("xFoto", MO.getFoto());
+
+                ctx.startActivity(pindah);
+
+            }
+        });
     }
 
     @Override
@@ -69,8 +101,8 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
     }
 
     public class VHObat extends RecyclerView.ViewHolder{
-        TextView tvId, tvNama, tvGolongan, tvBentuk, tvEfek, tvDeskripsi;
-        ImageView ivFoto;
+        TextView tvId, tvNama, tvGolongan, tvBentuk, tvEfek, tvDeskripsi, tvFoto;
+        ImageView ivFoto, ivHapus, ivUbah;
 
         public VHObat(@NonNull View itemView) {
             super(itemView);
@@ -81,15 +113,18 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
             tvBentuk = itemView.findViewById(R.id.tv_Bentuk);
             tvEfek = itemView.findViewById(R.id.tv_Efek);
             tvDeskripsi = itemView.findViewById(R.id.tv_deskripsi);
+            tvFoto = itemView.findViewById(R.id.tv_foto);
             ivFoto = itemView.findViewById(R.id.Iv_foto);
+            ivHapus = itemView.findViewById(R.id.bt_hapus);
+            ivUbah = itemView.findViewById(R.id.bt_edit);
 
-
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            ivHapus.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
+
                     AlertDialog.Builder pesan = new AlertDialog.Builder(ctx);
-                    pesan.setTitle("Perhatian");
-                    pesan.setMessage("Operaso apa yang akan dilakukan?");
+                    pesan.setTitle("Anda ingin menghapus " + tvNama.getText().toString());
+                    pesan.setMessage("Apakah anda yakin?");
                     pesan.setCancelable(true);
 
                     pesan.setNegativeButton("Hapus", new DialogInterface.OnClickListener() {
@@ -99,21 +134,29 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.VHObat>{
                             dialog.dismiss();
                         }
                     });
-                    pesan.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
+                    pesan.setPositiveButton("Batal", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent pindah = new Intent(ctx, UbahActivity.class);
-                            pindah.putExtra("xId", tvId.getText().toString());
-                            pindah.putExtra("xNama", tvNama.getText().toString());
-                            pindah.putExtra("xBentuk", tvBentuk.getText().toString());
-                            pindah.putExtra("xEfek", tvEfek.getText().toString());
-                            pindah.putExtra("xDeskripsi", tvDeskripsi.getText().toString());
-                            pindah.putExtra("xGolongan", tvGolongan.getText().toString());
-                            ctx.startActivity(pindah);
+                            dialog.dismiss();
                         }
                     });
-                    pesan.show();
-                    return false;
+                    AlertDialog alert = pesan.create();
+                    alert.show();
+                }
+            });
+            ivUbah.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent pindah = new Intent(ctx, UbahActivity.class);
+                    pindah.putExtra("xId", tvId.getText().toString());
+                    pindah.putExtra("xNama", tvNama.getText().toString());
+                    pindah.putExtra("xBentuk", tvBentuk.getText().toString());
+                    pindah.putExtra("xEfek", tvEfek.getText().toString());
+                    pindah.putExtra("xDeskripsi", tvDeskripsi.getText().toString());
+                    pindah.putExtra("xGolongan", tvGolongan.getText().toString());
+                    pindah.putExtra("xFoto", tvFoto.getText().toString());
+
+                    ctx.startActivity(pindah);
                 }
             });
         }

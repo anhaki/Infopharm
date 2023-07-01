@@ -5,12 +5,12 @@
     tools:ignore="MissingDefaultResource">
 
     <solid
-        android:color="#E7F6F2" >
+        android:color="#73B8EB" >
     </solid>
 
     <stroke
-        android:width="5dp"
-        android:color="#E7F6F2" >
+        android:width="3dp"
+        android:color="@color/black" >
     </stroke>
 
     <padding

@@ -2,15 +2,16 @@ package com.example.infopharm.API;
 
 import com.example.infopharm.Model.ModelResponse;
 
-import java.util.List;
-
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface APIRequestData {
     @GET("retrieve.php")
@@ -25,7 +26,14 @@ public interface APIRequestData {
             @Field("golongan") String golongan,
             @Field("bentuk") String bentuk,
             @Field("foto") String foto
-            );
+    );
+
+    @Multipart
+    @POST("upload.php")
+    Call<ResponseBody> ardUpload(
+            @Part MultipartBody.Part foto
+    );
+
 
     @FormUrlEncoded
     @POST("update.php")
@@ -38,6 +46,11 @@ public interface APIRequestData {
             @Field("bentuk") String bentuk,
             @Field("foto") String foto
     );
+
+    @FormUrlEncoded
+    @GET("update.php?id_obat={id_obat}")
+    Call<ModelResponse> getDetail(@Path("id_obat") String id_obat);
+
 
     @FormUrlEncoded
     @POST("delete.php")

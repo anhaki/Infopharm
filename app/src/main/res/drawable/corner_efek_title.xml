@@ -5,23 +5,23 @@
     tools:ignore="MissingDefaultResource">
 
     <solid
-        android:color="#2C3333" >
+        android:color="#FF6E6E" >
     </solid>
 
     <stroke
-        android:width="2dp"
-        android:color="#2C3333" >
+        android:width="3dp"
+        android:color="#000000" >
     </stroke>
 
     <padding
-        android:left="5dp"
-        android:top="5dp"
-        android:right="5dp"
-        android:bottom="5dp"    >
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp"    >
     </padding>
 
     <corners
-        android:radius="11dp"   >
+        android:radius="16dp"   >
     </corners>
 
 </shape>

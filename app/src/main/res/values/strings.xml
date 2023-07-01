@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">InfoPharm</string>
+    <string-array name="golongan">
+        <item>Obat bebas</item>
+        <item>Obat bebas terbatas</item>
+        <item>Obat keras</item>
+        <item>Narkotika</item>
+    </string-array>
+
 </resources>
